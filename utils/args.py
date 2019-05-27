@@ -11,5 +11,5 @@ def get_args():
         default="None",
         help="The Configuration file"
     )
-    args = argparse.parse_args()
+    args = argparser.parse_args()
     return args

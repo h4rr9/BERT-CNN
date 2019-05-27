@@ -3,6 +3,11 @@ from utils.dirs import create_dirs
 from utils.args import get_args
 from utils import factory
 import sys
+import os
+import warnings
+
+warnings.simplefilter("ignore")
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = '2'
 
 
 def main():
@@ -32,5 +37,6 @@ def main():
         print(e)
         sys.exit(-1)
 
-    if __name__ == "__main__":
-        main()
+
+if __name__ == "__main__":
+    main()
