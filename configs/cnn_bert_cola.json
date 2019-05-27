@@ -1,0 +1,26 @@
+{
+  "exp": {
+    "name": "conv_cola"
+  },
+  "data_loader": {
+    "name": "CoLA_data_loader.ConvMnistDataLoader",
+    "batch_size": 128
+  },
+  "model":{
+    "name": "conv_mnist_model.ConvMnistModel",
+    "learning_rate": 0.001,
+    "optimizer": "adadelta"
+  },
+  "trainer":{
+    "name": "CoLA_trainer.SimpleMnistModelTrainer",
+    "num_epochs": 10,
+    "verbose_training": true
+  },
+  "callbacks":{
+    "checkpoint_monitor": "math_corr",
+    "checkpoint_mode": "max",
+    "checkpoint_save_best_only": true,
+   "checkpoint_save_weights_only": true,
+    "checkpoint_verbose": true,
+    "tensorboard_write_graph": true
+  }
