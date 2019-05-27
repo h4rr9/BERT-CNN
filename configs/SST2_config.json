@@ -1,0 +1,30 @@
+{
+  "exp":{
+    "name": "conv_sst2"
+  },
+
+  "data_loader":{
+    "name": "SST2_data_loader.SST2DataLoader",
+    "batch_size": 128
+  },
+
+  "model":{
+    "name": "SST2_model.SST2Model",
+    "optimizer": "adam"
+  },
+
+  "trainer":{
+    "name": "SST2_trainer.SST2ModelTrainer",
+    "num_epochs": 10,
+    "verbose_training": true
+  },
+
+  "callbacks":{
+    "checkpoint_monitor": "val_acc",
+    "checkpoint_mode": "max",
+    "checkpoint_save_best_only": true,
+   "checkpoint_save_weights_only": false,
+    "checkpoint_verbose": true,
+    "tensorboard_write_graph": true
+  }
+}

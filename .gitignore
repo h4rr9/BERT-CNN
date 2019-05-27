@@ -108,6 +108,7 @@ ENV/
 
 # experiments data
 experiments/
+experiment_note/
 
 #datasets
 datasets/
