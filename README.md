@@ -16,3 +16,6 @@ the tokenization.py file is from the google-research/bert repo https://github.co
 
 execute the glue script in utils and it will download the datasets into /data/glue_data
 
+# Keras template
+
+the keras template is based on https://github.com/Ahmkel/Keras-Project-Template
