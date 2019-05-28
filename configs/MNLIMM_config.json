@@ -1,0 +1,30 @@
+{
+  "exp":{
+    "name": "conv_mnlimm"
+  },
+
+  "data_loader":{
+    "name": "MNLIMM_data_loader.MNLIMMDataLoader",
+    "batch_size": 128
+  },
+
+  "model":{
+    "name": "MNLIMM_model.MNLIMMModel",
+    "optimizer": "adam"
+  },
+
+  "trainer":{
+    "name": "MNLIMM_trainer.MNLIMMModelTrainer",
+    "num_epochs": 10,
+    "verbose_training": true
+  },
+
+  "callbacks":{
+    "checkpoint_monitor": "val_acc",
+    "checkpoint_mode": "max",
+    "checkpoint_save_best_only": true,
+   "checkpoint_save_weights_only": false,
+    "checkpoint_verbose": true,
+    "tensorboard_write_graph": true
+  }
+}

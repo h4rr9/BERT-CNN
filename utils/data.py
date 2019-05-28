@@ -22,18 +22,20 @@ class InputExample(object):
 def preprocess_label(label, onehot=False):
 
     if onehot:
-        return OneHotEncoder().fit_transform(label.reshape(-1, 1))
+        label = LabelEncoder().fit_transform(label)
+        return OneHotEncoder().fit_transform(label.reshape(-1, 1)).toarray()
 
     return LabelEncoder().fit_transform(label)
 
 
-def create_dataset(data, label=None, batch_size=128, is_training=True):
+def create_dataset(data, label=None, batch_size=128, is_training=True, classification=True):
 
     if not label is None:
-        if len(np.unique(label)) > 2:
-            label = preprocess_label(label, onehot=True)
-        else:
-            label = preprocess_label(label, onehot=False)
+        if classification:
+            if len(np.unique(label)) > 2:
+                label = preprocess_label(label, onehot=True)
+            else:
+                label = preprocess_label(label, onehot=False)
 
         if data.shape[0] != label.shape[0]:
             data = np.swapaxes(data, 0, 1)
@@ -89,7 +91,7 @@ def convert_single_example(tokenizer, example, seq_length):
         tokens_b = tokenizer.tokenize(example.text_b)
 
     if tokens_b:
-        _truncate_seq_pair(tokens_a, tokens_b, seq_length - 3)
+        _truncated_seq_pair(tokens_a, tokens_b, seq_length - 3)
     else:
         if len(tokens_a) > seq_length - 2:
             tokens_a = tokens_a[0:(seq_length - 2)]

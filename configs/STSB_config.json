@@ -1,0 +1,30 @@
+{
+  "exp":{
+    "name": "conv_stsb"
+  },
+
+  "data_loader":{
+    "name": "STSB_data_loader.STSBDataLoader",
+    "batch_size": 128
+  },
+
+  "model":{
+    "name": "STSB_model.STSBModel",
+    "optimizer": "adam"
+  },
+
+  "trainer":{
+    "name": "STSB_trainer.STSBModelTrainer",
+    "num_epochs": 10,
+    "verbose_training": true
+  },
+
+  "callbacks":{
+    "checkpoint_monitor": "val_pear_corr",
+    "checkpoint_mode": "max",
+    "checkpoint_save_best_only": true,
+   "checkpoint_save_weights_only": false,
+    "checkpoint_verbose": true,
+    "tensorboard_write_graph": true
+  }
+}

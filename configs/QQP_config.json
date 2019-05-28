@@ -1,0 +1,30 @@
+{
+  "exp":{
+    "name": "conv_qqp"
+  },
+
+  "data_loader":{
+    "name": "QQP_data_loader.QQPDataLoader",
+    "batch_size": 128
+  },
+
+  "model":{
+    "name": "QQP_model.QQPModel",
+    "optimizer": "adam"
+  },
+
+  "trainer":{
+    "name": "QQP_trainer.QQPModelTrainer",
+    "num_epochs": 10,
+    "verbose_training": true
+  },
+
+  "callbacks":{
+    "checkpoint_monitor": "val_f1_score",
+    "checkpoint_mode": "max",
+    "checkpoint_save_best_only": true,
+   "checkpoint_save_weights_only": false,
+    "checkpoint_verbose": true,
+    "tensorboard_write_graph": true
+  }
+}

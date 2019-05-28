@@ -1,0 +1,30 @@
+{
+  "exp":{
+    "name": "conv_wnli"
+  },
+
+  "data_loader":{
+    "name": "WNLI_data_loader.WNLIDataLoader",
+    "batch_size": 16
+  },
+
+  "model":{
+    "name": "WNLI_model.WNLIModel",
+    "optimizer": "adam"
+  },
+
+  "trainer":{
+    "name": "WNLI_trainer.WNLIModelTrainer",
+    "num_epochs": 10,
+    "verbose_training": true
+  },
+
+  "callbacks":{
+    "checkpoint_monitor": "val_acc",
+    "checkpoint_mode": "max",
+    "checkpoint_save_best_only": true,
+   "checkpoint_save_weights_only": false,
+    "checkpoint_verbose": true,
+    "tensorboard_write_graph": true
+  }
+}

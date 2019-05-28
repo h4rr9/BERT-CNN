@@ -1,0 +1,30 @@
+{
+  "exp":{
+    "name": "conv_qnli"
+  },
+
+  "data_loader":{
+    "name": "QNLI_data_loader.QNLIDataLoader",
+    "batch_size": 128
+  },
+
+  "model":{
+    "name": "QNLI_model.QNLIModel",
+    "optimizer": "adam"
+  },
+
+  "trainer":{
+    "name": "QNLI_trainer.QNLIModelTrainer",
+    "num_epochs": 10,
+    "verbose_training": true
+  },
+
+  "callbacks":{
+    "checkpoint_monitor": "val_acc",
+    "checkpoint_mode": "max",
+    "checkpoint_save_best_only": true,
+   "checkpoint_save_weights_only": false,
+    "checkpoint_verbose": true,
+    "tensorboard_write_graph": true
+  }
+}
