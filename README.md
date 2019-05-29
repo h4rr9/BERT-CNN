@@ -8,13 +8,15 @@ The BERT model used is the BERT-Base, Uncased: 12-layer, 768-hidden, 12-heads, 1
 
 it is available at https://tfhub.dev/google/bert_uncased_L-12_H-768_A-12/1
 
-replace the https://tfhub.dev with https://storage.googleapis.com/tfhub-modules and append a .tar.gz and place it in /data/bert_module
+replace the https://tfhub.dev with https://storage.googleapis.com/tfhub-modules and append a .tar.gz and place it in ./data/bert_module
 
 the tokenization.py file is from the google-research/bert repo https://github.com/google-research/bert
 
 # GLUE tasks
 
-execute the glue script in utils and it will download the datasets into /data/glue_data
+execute <code>python ./utils/download_glue_data.py --data_dir ./data/glue_data</code> to download the tasks.
+
+execute <code>python ./utils/preprocess_tasks.py --data_dir ./data/glue_data</code> to process the tsv files so pandas can read them.
 
 # Keras template
 

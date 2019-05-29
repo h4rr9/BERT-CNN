@@ -7,7 +7,7 @@ import os
 class BaseModel(object):
     def __init__(self, config):
         self.config = config
-        self.model = None
+        self.build_base_model()
 
     def build_base_model(self, max_seq_length):
 
@@ -27,6 +27,8 @@ class BaseModel(object):
 
         bert_output = custom_layers.BertLayer()(bert_inputs)
 
+        # model begins here
+
         convx = layers.Conv1D(filters=100, kernel_size=3,
                               padding='same', name='conv1')(bert_output)
         poolx = layers.GlobalMaxPool1D()(convx)
@@ -40,6 +42,8 @@ class BaseModel(object):
         poolz = layers.GlobalMaxPool1D()(convz)
 
         self.base_out = layers.Concatenate()([poolx, pooly, poolz])
+
+        # final layer in derived mdoel class
 
     def build_model(self):
         raise NotImplementedError
