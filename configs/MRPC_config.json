@@ -4,17 +4,17 @@
   },
 
   "data_loader":{
-    "name": "MRPC_data_loader.MRPCDataLoader",
+    "name": "MRPCDataLoader",
     "batch_size": 128
   },
 
   "model":{
-    "name": "MRPC_model.MRPCModel",
+    "name": "MRPCModel",
     "optimizer": "adam"
   },
 
   "trainer":{
-    "name": "MRPC_trainer.MRPCModelTrainer",
+    "name": "MRPCModelTrainer",
     "num_epochs": 10,
     "verbose_training": true
   },

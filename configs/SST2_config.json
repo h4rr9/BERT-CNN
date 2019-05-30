@@ -4,17 +4,17 @@
   },
 
   "data_loader":{
-    "name": "SST2_data_loader.SST2DataLoader",
+    "name": "SST2DataLoader",
     "batch_size": 128
   },
 
   "model":{
-    "name": "SST2_model.SST2Model",
+    "name": "SST2Model",
     "optimizer": "adam"
   },
 
   "trainer":{
-    "name": "SST2_trainer.SST2ModelTrainer",
+    "name": "SST2ModelTrainer",
     "num_epochs": 10,
     "verbose_training": true
   },

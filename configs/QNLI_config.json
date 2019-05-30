@@ -4,17 +4,17 @@
   },
 
   "data_loader":{
-    "name": "QNLI_data_loader.QNLIDataLoader",
+    "name": "QNLIDataLoader",
     "batch_size": 128
   },
 
   "model":{
-    "name": "QNLI_model.QNLIModel",
+    "name": "QNLIModel",
     "optimizer": "adam"
   },
 
   "trainer":{
-    "name": "QNLI_trainer.QNLIModelTrainer",
+    "name": "QNLIModelTrainer",
     "num_epochs": 10,
     "verbose_training": true
   },

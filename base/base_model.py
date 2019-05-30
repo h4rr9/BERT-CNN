@@ -1,15 +1,14 @@
 from tensorflow.keras import models
 from tensorflow.keras import layers
-from utils import custom_layers
+import custom_layers
 import os
 
 
 class BaseModel(object):
     def __init__(self, config):
         self.config = config
-        self.build_base_model()
 
-    def build_base_model(self, max_seq_length):
+    def build_bert_layer(self, max_seq_length):
 
         self.base_in = layers.Input(
             shape=(3, max_seq_length,), name='BERT_input')
@@ -27,23 +26,25 @@ class BaseModel(object):
 
         bert_output = custom_layers.BertLayer()(bert_inputs)
 
-        # model begins here
+        return bert_output
+
+    def build_base_model(self, max_seq_length):
+
+        embedding = self.build_bert_layer(max_seq_length=max_seq_length)
 
         convx = layers.Conv1D(filters=100, kernel_size=3,
-                              padding='same', name='conv1')(bert_output)
+                              padding='same', name='conv1')(embedding)
         poolx = layers.GlobalMaxPool1D()(convx)
 
         convy = layers.Conv1D(filters=100, kernel_size=4,
-                              padding='same', name='conv2')(bert_output)
+                              padding='same', name='conv2')(embedding)
         pooly = layers.GlobalMaxPool1D()(convy)
 
         convz = layers.Conv1D(filters=100, kernel_size=5,
-                              padding='same', name='conv3')(bert_output)
+                              padding='same', name='conv3')(embedding)
         poolz = layers.GlobalMaxPool1D()(convz)
 
         self.base_out = layers.Concatenate()([poolx, pooly, poolz])
-
-        # final layer in derived mdoel class
 
     def build_model(self):
         raise NotImplementedError

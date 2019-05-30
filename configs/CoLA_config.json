@@ -4,17 +4,17 @@
   },
 
   "data_loader":{
-    "name": "CoLA_data_loader.CoLADataLoader",
+    "name": "CoLADataLoader",
     "batch_size": 128
   },
 
   "model":{
-    "name": "CoLA_model.CoLAModel",
+    "name": "CoLAModel",
     "optimizer": "adam"
   },
 
   "trainer":{
-    "name": "CoLA_trainer.CoLAModelTrainer",
+    "name": "CoLAModelTrainer",
     "num_epochs": 10,
     "verbose_training": true
   },

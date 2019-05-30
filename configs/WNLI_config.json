@@ -4,17 +4,17 @@
   },
 
   "data_loader":{
-    "name": "WNLI_data_loader.WNLIDataLoader",
+    "name": "WNLIDataLoader",
     "batch_size": 16
   },
 
   "model":{
-    "name": "WNLI_model.WNLIModel",
+    "name": "WNLIModel",
     "optimizer": "adam"
   },
 
   "trainer":{
-    "name": "WNLI_trainer.WNLIModelTrainer",
+    "name": "WNLIModelTrainer",
     "num_epochs": 10,
     "verbose_training": true
   },

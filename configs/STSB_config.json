@@ -4,17 +4,17 @@
   },
 
   "data_loader":{
-    "name": "STSB_data_loader.STSBDataLoader",
+    "name": "STSBDataLoader",
     "batch_size": 128
   },
 
   "model":{
-    "name": "STSB_model.STSBModel",
+    "name": "STSBModel",
     "optimizer": "adam"
   },
 
   "trainer":{
-    "name": "STSB_trainer.STSBModelTrainer",
+    "name": "STSBModelTrainer",
     "num_epochs": 10,
     "verbose_training": true
   },

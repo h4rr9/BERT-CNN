@@ -4,17 +4,17 @@
   },
 
   "data_loader":{
-    "name": "RTE_data_loader.RTEDataLoader",
+    "name": "RTEDataLoader",
     "batch_size": 128
   },
 
   "model":{
-    "name": "RTE_model.RTEModel",
+    "name": "RTEModel",
     "optimizer": "adam"
   },
 
   "trainer":{
-    "name": "RTE_trainer.RTEModelTrainer",
+    "name": "RTEModelTrainer",
     "num_epochs": 10,
     "verbose_training": true
   },

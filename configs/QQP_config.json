@@ -4,17 +4,17 @@
   },
 
   "data_loader":{
-    "name": "QQP_data_loader.QQPDataLoader",
+    "name": "QQPDataLoader",
     "batch_size": 128
   },
 
   "model":{
-    "name": "QQP_model.QQPModel",
+    "name": "QQPModel",
     "optimizer": "adam"
   },
 
   "trainer":{
-    "name": "QQP_trainer.QQPModelTrainer",
+    "name": "QQPModelTrainer",
     "num_epochs": 10,
     "verbose_training": true
   },

@@ -4,17 +4,17 @@
   },
 
   "data_loader":{
-    "name": "MNLIMM_data_loader.MNLIMMDataLoader",
+    "name": "MNLIMMDataLoader",
     "batch_size": 128
   },
 
   "model":{
-    "name": "MNLIMM_model.MNLIMMModel",
+    "name": "MNLIMMModel",
     "optimizer": "adam"
   },
 
   "trainer":{
-    "name": "MNLIMM_trainer.MNLIMMModelTrainer",
+    "name": "MNLIMMModelTrainer",
     "num_epochs": 10,
     "verbose_training": true
   },
