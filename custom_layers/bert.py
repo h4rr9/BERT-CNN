@@ -5,6 +5,7 @@ from tensorflow.keras import backend as K
 
 
 _BERT_SPEC = './data/bert_module/'
+# _BERT_SPEC = '/scratch/scratch1/harig/data/bert_module/'
 
 
 class BertLayer(tf.layers.Layer):

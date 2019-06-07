@@ -1,5 +1,4 @@
-from tensorflow.keras import models
-from tensorflow.keras import layers
+import tensorflow as tf
 import custom_layers
 import os
 
@@ -12,16 +11,16 @@ class BaseModel(object):
 
     def build_bert_layer(self, max_seq_length):
 
-        self.base_in = layers.Input(
+        self.base_in = tf.keras.layers.Input(
             shape=(3, max_seq_length,), name='BERT_input')
 
-        in_id = layers.Lambda(lambda x: x[:, 0, :], output_shape=(
+        in_id = tf.keras.layers.Lambda(lambda x: x[:, 0, :], output_shape=(
             None, max_seq_length,), name='input_ids')(self.base_in)
 
-        in_mask = layers.Lambda(lambda x: x[:, 1, :], output_shape=(
+        in_mask = tf.keras.layers.Lambda(lambda x: x[:, 1, :], output_shape=(
             None, max_seq_length,), name='input_masks')(self.base_in)
 
-        in_type_id = layers.Lambda(lambda x: x[:, 2, :], output_shape=(
+        in_type_id = tf.keras.layers.Lambda(lambda x: x[:, 2, :], output_shape=(
             None, max_seq_length,), name='input_type_ids')(self.base_in)
 
         bert_inputs = [in_id, in_mask, in_type_id]
@@ -37,33 +36,34 @@ class BaseModel(object):
         block1 = custom_layers.GatedBlock(
             inputs=embedding, filters=32, name='block1')
 
-        pool1 = layers.MaxPool1D(pool_size=2)(block1)
-        x = layers.BatchNormalization(axis=-1)(pool1)
-        dropout1 = layers.Dropout(rate=0.5)(x)
+        pool1 = tf.keras.layers.MaxPool1D(pool_size=2)(block1)
+        x = tf.keras.layers.BatchNormalization(axis=-1)(pool1)
+        dropout1 = tf.keras.layers.Dropout(rate=0.5)(x)
 
         block2 = custom_layers.GatedBlock(
             inputs=dropout1, filters=64, name='block2')
 
-        pool2 = layers.MaxPool1D(pool_size=2)(block2)
-        x = layers.BatchNormalization(axis=-1)(pool2)
-        dropout2 = layers.Dropout(rate=0.5)(x)
+        pool2 = tf.keras.layers.MaxPool1D(pool_size=2)(block2)
+        x = tf.keras.layers.BatchNormalization(axis=-1)(pool2)
+        dropout2 = tf.keras.layers.Dropout(rate=0.5)(x)
 
         block3 = custom_layers.GatedBlock(
             inputs=dropout2, filters=128, name='block3')
 
-        pool3 = layers.MaxPool1D(pool_size=2)(block3)
-        x = layers.BatchNormalization(axis=-1)(pool3)
-        dropout3 = layers.Dropout(rate=0.5)(x)
+        pool3 = tf.keras.layers.MaxPool1D(pool_size=2)(block3)
+        x = tf.keras.layers.BatchNormalization(axis=-1)(pool3)
+        dropout3 = tf.keras.layers.Dropout(rate=0.5)(x)
 
-        flatten = layers.GlobalAveragePooling1D()(dropout3)
+        flatten = tf.keras.layers.GlobalAveragePooling1D()(dropout3)
 
-        x = layers.Dense(units=128, activation='elu')(flatten)
-        x = layers.BatchNormalization(axis=-1)(x)
-        x = layers.Dropout(rate=0.5)(x)
+        x = tf.keras.layers.Dense(units=128, activation='elu')(flatten)
+        x = tf.keras.layers.BatchNormalization(axis=-1)(x)
+        x = tf.keras.layers.Dropout(rate=0.5)(x)
 
-        x = layers.Dense(units=64, activation='elu')(x)
-        x = layers.BatchNormalization(axis=-1)(x)
-        self.base_out = layers.Dropout(rate=0.5)(x)
+        x = tf.keras.layers.Dense(units=64, activation='elu')(x)
+        x = tf.keras.layers.BatchNormalization(axis=-1)(x)
+
+        self.base_out = tf.keras.layers.Dropout(rate=0.5)(x)
 
     def build_model(self):
         raise NotImplementedError

@@ -1,4 +1,5 @@
 _DATA_PATH = "./data/glue_data/"
+# _DATA_PATH = "/scratch/scratch1/harig/data/glue_data/"
 
 
 class BaseDataLoader(object):
