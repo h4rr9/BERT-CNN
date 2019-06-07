@@ -10,7 +10,7 @@
 
   "model":{
     "name": "CoLAModel",
-    "optimizer": "adam"
+    "optimizer": "nadam"
   },
 
   "trainer":{

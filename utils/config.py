@@ -5,6 +5,9 @@ import time
 from dotmap import DotMap
 
 
+_EXPERIMENTS_PATH = 'experiments'
+
+
 def get_config_from_json(json_file):
 
     with open(json_file, "r") as config_file:
@@ -18,9 +21,9 @@ def get_config_from_json(json_file):
 def process_config(json_file):
     config, _ = get_config_from_json(json_file)
 
-    config.callbacks.tensorboard_log_dir = os.path.join("experiments", time.strftime(
+    config.callbacks.tensorboard_log_dir = os.path.join(_EXPERIMENTS_PATH, time.strftime(
         "%Y-%m-%d", time.localtime()), config.exp.name, "logs")
-    config.callbacks.checkpoint_dir = os.path.join("experiments", time.strftime(
+    config.callbacks.checkpoint_dir = os.path.join(_EXPERIMENTS_PATH, time.strftime(
         "%Y-%m-%d", time.localtime()), config.exp.name, "checkpoints")
 
     return config

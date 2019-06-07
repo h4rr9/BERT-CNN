@@ -3,6 +3,8 @@ from tensorflow.keras import layers
 import custom_layers
 import os
 
+import custom_layers
+
 
 class BaseModel(object):
     def __init__(self, config):
@@ -32,19 +34,36 @@ class BaseModel(object):
 
         embedding = self.build_bert_layer(max_seq_length=max_seq_length)
 
-        convx = layers.Conv1D(filters=100, kernel_size=3,
-                              padding='same', name='conv1')(embedding)
-        poolx = layers.GlobalMaxPool1D()(convx)
+        block1 = custom_layers.GatedBlock(
+            inputs=embedding, filters=32, name='block1')
 
-        convy = layers.Conv1D(filters=100, kernel_size=4,
-                              padding='same', name='conv2')(embedding)
-        pooly = layers.GlobalMaxPool1D()(convy)
+        pool1 = layers.MaxPool1D(pool_size=2)(block1)
+        x = layers.BatchNormalization(axis=-1)(pool1)
+        dropout1 = layers.Dropout(rate=0.5)(x)
 
-        convz = layers.Conv1D(filters=100, kernel_size=5,
-                              padding='same', name='conv3')(embedding)
-        poolz = layers.GlobalMaxPool1D()(convz)
+        block2 = custom_layers.GatedBlock(
+            inputs=dropout1, filters=64, name='block2')
 
-        self.base_out = layers.Concatenate()([poolx, pooly, poolz])
+        pool2 = layers.MaxPool1D(pool_size=2)(block2)
+        x = layers.BatchNormalization(axis=-1)(pool2)
+        dropout2 = layers.Dropout(rate=0.5)(x)
+
+        block3 = custom_layers.GatedBlock(
+            inputs=dropout2, filters=128, name='block3')
+
+        pool3 = layers.MaxPool1D(pool_size=2)(block3)
+        x = layers.BatchNormalization(axis=-1)(pool3)
+        dropout3 = layers.Dropout(rate=0.5)(x)
+
+        flatten = layers.GlobalAveragePooling1D()(dropout3)
+
+        x = layers.Dense(units=128, activation='elu')(flatten)
+        x = layers.BatchNormalization(axis=-1)(x)
+        x = layers.Dropout(rate=0.5)(x)
+
+        x = layers.Dense(units=64, activation='elu')(x)
+        x = layers.BatchNormalization(axis=-1)(x)
+        self.base_out = layers.Dropout(rate=0.5)(x)
 
     def build_model(self):
         raise NotImplementedError

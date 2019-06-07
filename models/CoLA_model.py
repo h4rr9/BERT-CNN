@@ -18,3 +18,5 @@ class CoLAModel(BaseModel):
 
         self.model.compile(loss='binary_crossentropy',
                            optimizer=self.config.model.optimizer, metrics=['accuracy', matt_corr])
+
+        print('DONE BUILDING MODEL')
