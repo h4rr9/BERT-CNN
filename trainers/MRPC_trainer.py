@@ -1,5 +1,7 @@
 from base.base_trainer import BaseTrain
 import os
+from tensorflow.keras.callbacks import ModelCheckpoint, TensorBoard
+from tensorflow.keras import backend as K
 import tensorflow as tf
 
 
@@ -20,11 +22,11 @@ class MRPCModelTrainer(BaseTrain):
         sess.run(tf.local_variables_initializer())
         sess.run(tf.global_variables_initializer())
         sess.run(tf.tables_initializer())
-        tf.keras.backend.set_session(sess)
+        K.set_session(sess)
 
     def init_callbacks(self):
         self.callbacks.append(
-            tf.keras.callbacks.ModelCheckpoint(
+            ModelCheckpoint(
                 filepath=os.path.join(
                     self.config.callbacks.checkpoint_dir, '%s-{epoch:02d}-{val_loss:.2f}.hdf5' % self.config.exp.name),
                 monitor=self.config.callbacks.checkpoint_monitor,
@@ -36,7 +38,7 @@ class MRPCModelTrainer(BaseTrain):
         )
 
         self.callbacks.append(
-            tf.keras.callbacks.TensorBoard(
+            TensorBoard(
                 log_dir=self.config.callbacks.tensorboard_log_dir,
                 write_graph=self.config.callbacks.tensorboard_write_graph,
             )

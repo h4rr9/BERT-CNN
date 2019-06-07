@@ -34,7 +34,7 @@ def main():
         trainer.train()
 
     except Exception as e:
-        print(e.with_traceback())
+        print(e)
         sys.exit(-1)
 
 

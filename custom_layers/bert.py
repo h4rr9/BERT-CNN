@@ -26,14 +26,11 @@ class BertLayer(tf.layers.Layer):
         if self.trainable:
             trainable_vars = self.bert.variables
 
-            # Remove unused layers
             trainable_vars = [
                 var for var in trainable_vars if not "/cls/" in var.name]
 
-            # Select how many layers to fine tune
             trainable_vars = trainable_vars[-self.n_fine_tune_layers:]
 
-            # Add to trainable weights
             for var in trainable_vars:
                 self._trainable_weights.append(var)
 

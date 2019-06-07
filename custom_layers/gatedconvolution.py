@@ -1,8 +1,10 @@
 import tensorflow as tf
+from tensorflow.keras import layers
+from tensorflow.keras import backend as K
 
 
 def GatedConv1D(inputs, kernel_size, filters, name='gatedconv'):
-    with tf.keras.backend.name_scope(name):
+    with K.name_scope(name):
 
         padded_input = layers.ZeroPadding1D(
             padding=(kernel_size - 1, 0))(inputs)
@@ -18,7 +20,7 @@ def GatedConv1D(inputs, kernel_size, filters, name='gatedconv'):
 
 
 def GatedBlock(inputs, filters, name='gatedblock'):
-    with tf.keras.backend.name_scope(name):
+    with K.name_scope(name):
 
         conv1 = GatedConv1D(inputs=inputs, kernel_size=3,
                             filters=filters, name='gatedconv3x3')

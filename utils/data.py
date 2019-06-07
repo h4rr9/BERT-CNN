@@ -2,13 +2,13 @@ import re
 import pandas as pd
 import numpy as np
 import tensorflow as tf
+from tensorflow.data import Dataset
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from tqdm import tqdm
 from utils import tokenization
 
 _VOCAB_FILE = './data/bert_module/assets/vocab.txt'
 # _VOCAB_FILE = '/scratch/scratch1/harig/data/bert_module/assets/vocab.txt'
-
 _DO_LOWER_CASE = True
 
 
@@ -41,14 +41,14 @@ def create_dataset(data, label=None, batch_size=128, is_training=True, classific
         if data.shape[0] != label.shape[0]:
             data = np.swapaxes(data, 0, 1)
 
-        dataset = tf.data.Dataset.from_tensor_slices(
+        dataset = Dataset.from_tensor_slices(
             (data, label))
 
         if is_training:
             dataset = dataset.shuffle(len(label))
 
     else:
-        dataset = tf.data.Dataset.from_tensor_slices(data)
+        dataset = Dataset.from_tensor_slices(data)
 
     return dataset.batch(batch_size).repeat()
 
