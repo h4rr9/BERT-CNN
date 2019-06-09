@@ -2,7 +2,7 @@ import keras_bert
 import os
 from keras.models import Model
 
-# _BERT_SPEC = '/scratch/scratch1/harig/data/bert_module/'
+# _BERT_PATH = '/scratch/scratch1/harig/data'
 _BERT_PATH = './data'
 _BERT_LARGE = 'uncased_L-24_H-1024_A-16'
 _BERT_BASE = 'uncased_L-12_H-768_A-12'

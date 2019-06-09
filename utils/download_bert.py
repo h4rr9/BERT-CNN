@@ -42,7 +42,8 @@ def main(arguments):
     if not os.path.isdir(args.bert_dir):
         os.mkdir(args.bert_dir)
 
-    assert args.bert_model in ['base', 'large', 'both']
+    assert args.bert_model in ['base', 'large',
+                               'both'], "model not specified properly"
 
     if args.bert_model == 'base':
         download_base(args.bert_dir)

@@ -1,7 +1,7 @@
 from base.base_trainer import BaseTrain
 import os
-from tensorflow.keras.callbacks import ModelCheckpoint, TensorBoard
-from tensorflow.keras import backend as K
+from keras.callbacks import ModelCheckpoint, TensorBoard
+from keras import backend as K
 import tensorflow as tf
 
 
@@ -42,6 +42,8 @@ class QNLIModelTrainer(BaseTrain):
         )
 
     def train(self):
+
+        K.get_session().run(tf.global_variables_initializer())
 
         history = self.model.fit(
             x=[self.train_data[0], self.train_data[0]],
