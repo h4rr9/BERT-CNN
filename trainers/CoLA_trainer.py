@@ -16,13 +16,6 @@ class CoLAModelTrainer(BaseTrain):
         self.val_acc = []
         self.val_matt_corr = []
         self.init_callbacks()
-        self.initialize_vars(self.sess)
-
-    def initialize_vars(self, sess):
-        sess.run(tf.local_variables_initializer())
-        sess.run(tf.global_variables_initializer())
-        sess.run(tf.tables_initializer())
-        K.set_session(sess)
 
     def init_callbacks(self):
         self.callbacks.append(
@@ -46,16 +39,16 @@ class CoLAModelTrainer(BaseTrain):
 
     def train(self):
 
-        self.initialize_vars(self.sess)
 
         history = self.model.fit(
-            x=self.train_data,
-            steps_per_epoch=self.n_train // self.config.data_loader.batch_size + 1,
+            x=[self.train_data[0], self.train_data[0]],
+            y=self.train_label,
             epochs=self.config.trainer.num_epochs,
             verbose=self.config.trainer.verbose_training,
-            validation_data=self.val_data,
-            validation_steps=self.n_val // self.config.data_loader.batch_size + 1,
-            callbacks=self.callbacks
+            validation_data=(
+                [self.val_data[0], self.val_data[1]], self.val_label),
+            callbacks=self.callbacks,
+            batch_size=self.config.trainer.batch_size
         )
 
         self.loss.extend(history.history['loss'])

@@ -4,8 +4,7 @@
   },
 
   "data_loader":{
-    "name": "SST2DataLoader",
-    "batch_size": 128
+    "name": "SST2DataLoader"
   },
 
   "model":{
@@ -16,7 +15,8 @@
   "trainer":{
     "name": "SST2ModelTrainer",
     "num_epochs": 10,
-    "verbose_training": true
+    "verbose_training": true,
+    "batch_size": 128
   },
 
   "callbacks":{

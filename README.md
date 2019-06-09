@@ -6,9 +6,11 @@ Testing the performance of CNN and pretrained BERT embeddings on the GLUE Tasks
 
 The BERT model used is the BERT-Base, Uncased: 12-layer, 768-hidden, 12-heads, 110M parameters
 
-it is available at https://tfhub.dev/google/bert_uncased_L-12_H-768_A-12/1
+and BERT-Large, Uncased: 24-layer, 1024-hidden, 16-heads, 340M parameters
 
-replace the https://tfhub.dev with https://storage.googleapis.com/tfhub-modules and append a .tar.gz and place it in ./data/bert_module
+Bert Base available at https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip
+
+Bert Large available at https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-24_H-1024_A-16.zip
 
 the tokenization.py file is from the google-research/bert repo https://github.com/google-research/bert
 
@@ -21,3 +23,7 @@ execute <code>python ./utils/preprocess_tasks.py --data_dir ./data/glue_data</co
 # Keras template
 
 the keras template is based on https://github.com/Ahmkel/Keras-Project-Template
+
+# Keras implementaion of BERT
+
+ The keras implementation of BERT is based on https://github.com/CyberZHG/keras-bert

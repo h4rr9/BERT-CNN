@@ -1,6 +1,5 @@
-import tensorflow as tf
-from tensorflow.keras import layers
-from tensorflow.keras import backend as K
+from keras import layers
+from keras import backend as K
 
 
 def GatedConv1D(inputs, kernel_size, filters, name='gatedconv'):

@@ -5,7 +5,6 @@ _DATA_PATH = "./data/glue_data/"
 class BaseDataLoader(object):
     def __init__(self, config):
         self.config = config
-        self.batch_size = config.data_loader.batch_size
 
     def get_train_data(self):
         raise NotImplementedError

@@ -7,8 +7,8 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from tqdm import tqdm
 from utils import tokenization
 
-_VOCAB_FILE = './data/bert_module/assets/vocab.txt'
-# _VOCAB_FILE = '/scratch/scratch1/harig/data/bert_module/assets/vocab.txt'
+_VOCAB_FILE = './data/uncased_L-24_H-1024_A-16/vocab.txt'
+# _VOCAB_FILE = '/scratch/scratch1/harig/data/uncased_L-24_H-1024_A-16/vocab.txt'
 _DO_LOWER_CASE = True
 
 
@@ -143,7 +143,7 @@ def convert_examples_to_features(tokenizer, examples, max_seq_length=256):
         input_masks.append(input_mask)
         input_type_ids.append(input_type_id)
 
-    return np.array([np.array(input_ids), np.array(input_masks), np.array(input_type_ids)])
+    return np.array([np.array(input_ids), np.array(input_type_ids), np.array(input_masks)])
 
 
 def _truncated_seq_pair(tokens_a, tokens_b, max_length):

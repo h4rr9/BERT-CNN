@@ -1,9 +1,7 @@
-from tensorflow.keras import models
-from tensorflow.keras import layers
-import custom_layers
+from keras import models
+from keras import layers
+import custom
 import os
-
-import custom_layers
 
 
 class BaseModel(object):
@@ -11,44 +9,33 @@ class BaseModel(object):
         self.config = config
 
     def build_bert_layer(self, max_seq_length):
+        self._bert = custom.BERTModel(
+            seq_len=max_seq_length, trainable=False)
 
-        self.base_in = layers.Input(
-            shape=(3, max_seq_length,), name='BERT_input')
+        extract_layer = custom.RemoveMask()(
+            self._bert.layers[-1].output)
 
-        in_id = layers.Lambda(lambda x: x[:, 0, :], output_shape=(
-            None, max_seq_length,), name='input_ids')(self.base_in)
-
-        in_mask = layers.Lambda(lambda x: x[:, 1, :], output_shape=(
-            None, max_seq_length,), name='input_masks')(self.base_in)
-
-        in_type_id = layers.Lambda(lambda x: x[:, 2, :], output_shape=(
-            None, max_seq_length,), name='input_type_ids')(self.base_in)
-
-        bert_inputs = [in_id, in_mask, in_type_id]
-
-        bert_output = custom_layers.BertLayer()(bert_inputs)
-
-        return bert_output
+        return extract_layer
 
     def build_base_model(self, max_seq_length):
 
         embedding = self.build_bert_layer(max_seq_length=max_seq_length)
 
-        block1 = custom_layers.GatedBlock(
+        block1 = custom.GatedBlock(
             inputs=embedding, filters=32, name='block1')
 
         pool1 = layers.MaxPool1D(pool_size=2)(block1)
         x = layers.BatchNormalization(axis=-1)(pool1)
         dropout1 = layers.Dropout(rate=0.5)(x)
 
-        block2 = custom_layers.GatedBlock(
+        block2 = custom.GatedBlock(
             inputs=dropout1, filters=64, name='block2')
 
         pool2 = layers.MaxPool1D(pool_size=2)(block2)
         x = layers.BatchNormalization(axis=-1)(pool2)
         dropout2 = layers.Dropout(rate=0.5)(x)
 
-        block3 = custom_layers.GatedBlock(
+        block3 = custom.GatedBlock(
             inputs=dropout2, filters=128, name='block3')
 
         pool3 = layers.MaxPool1D(pool_size=2)(block3)

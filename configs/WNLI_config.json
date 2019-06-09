@@ -4,8 +4,7 @@
   },
 
   "data_loader":{
-    "name": "WNLIDataLoader",
-    "batch_size": 16
+    "name": "WNLIDataLoader"
   },
 
   "model":{
@@ -16,7 +15,8 @@
   "trainer":{
     "name": "WNLIModelTrainer",
     "num_epochs": 10,
-    "verbose_training": true
+    "verbose_training": true,
+    "batch_size": 16
   },
 
   "callbacks":{

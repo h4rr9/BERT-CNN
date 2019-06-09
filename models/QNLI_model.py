@@ -1,6 +1,6 @@
 from base.base_model import BaseModel
-from tensorflow.keras import models
-from tensorflow.keras import layers
+from keras import models
+from keras import layers
 
 
 class QNLIModel(BaseModel):
@@ -13,7 +13,7 @@ class QNLIModel(BaseModel):
 
         preds = layers.Dense(units=1, activation='sigmoid')(self.base_out)
 
-        self.model = models.Model(inputs=self.base_in, outputs=preds)
+        self.model = models.Model(inputs=self._bert.input, outputs=preds)
 
         self.model.compile(loss='binary_crossentropy',
                            optimizer=self.config.model.optimizer, metrics=['accuracy'])

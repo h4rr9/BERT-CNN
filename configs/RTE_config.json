@@ -4,8 +4,7 @@
   },
 
   "data_loader":{
-    "name": "RTEDataLoader",
-    "batch_size": 128
+    "name": "RTEDataLoader"
   },
 
   "model":{
@@ -16,7 +15,8 @@
   "trainer":{
     "name": "RTEModelTrainer",
     "num_epochs": 10,
-    "verbose_training": true
+    "verbose_training": true,
+    "batch_size": 128
   },
 
   "callbacks":{
