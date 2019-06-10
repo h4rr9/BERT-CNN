@@ -9,14 +9,16 @@
 
   "model":{
     "name": "MNLIMMModel",
-    "optimizer": "adam"
+    "optimizer": "nadam",
+    "dropout_rate": 0.5,
+    "activation": "elu"
   },
 
   "trainer":{
     "name": "MNLIMMModelTrainer",
-    "num_epochs": 10,
-    "verbose_training": true,
-    "batch_size": 128
+    "num_epochs": 100,
+    "verbose_training": 2,
+    "batch_size": 64
   },
 
   "callbacks":{

@@ -9,14 +9,16 @@
 
   "model":{
     "name": "WNLIModel",
-    "optimizer": "adam"
+    "optimizer": "nadam",
+    "dropout_rate": 0.5,
+    "activation": "elu"
   },
 
   "trainer":{
     "name": "WNLIModelTrainer",
-    "num_epochs": 10,
-    "verbose_training": true,
-    "batch_size": 16
+    "num_epochs": 100,
+    "verbose_training": 2,
+    "batch_size": 64
   },
 
   "callbacks":{

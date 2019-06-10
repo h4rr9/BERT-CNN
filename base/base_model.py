@@ -19,6 +19,9 @@ class BaseModel(object):
 
     def build_base_model(self, max_seq_length):
 
+        dropout_rate = self.config.model.dropout_rate
+        activation = self.config.model.activation
+
         embedding = self.build_bert_layer(max_seq_length=max_seq_length)
 
         block1 = custom.GatedBlock(
@@ -26,31 +29,31 @@ class BaseModel(object):
 
         pool1 = layers.MaxPool1D(pool_size=2)(block1)
         x = layers.BatchNormalization(axis=-1)(pool1)
-        dropout1 = layers.Dropout(rate=0.5)(x)
+        dropout1 = layers.Dropout(rate=dropout_rate)(x)
 
         block2 = custom.GatedBlock(
             inputs=dropout1, filters=64, name='block2')
 
         pool2 = layers.MaxPool1D(pool_size=2)(block2)
         x = layers.BatchNormalization(axis=-1)(pool2)
-        dropout2 = layers.Dropout(rate=0.5)(x)
+        dropout2 = layers.Dropout(rate=dropout_rate)(x)
 
         block3 = custom.GatedBlock(
             inputs=dropout2, filters=128, name='block3')
 
         pool3 = layers.MaxPool1D(pool_size=2)(block3)
         x = layers.BatchNormalization(axis=-1)(pool3)
-        dropout3 = layers.Dropout(rate=0.5)(x)
+        dropout3 = layers.Dropout(rate=dropout_rate)(x)
 
         flatten = layers.GlobalAveragePooling1D()(dropout3)
 
-        x = layers.Dense(units=128, activation='elu')(flatten)
+        x = layers.Dense(units=128, activation=activation)(flatten)
         x = layers.BatchNormalization(axis=-1)(x)
-        x = layers.Dropout(rate=0.5)(x)
+        x = layers.Dropout(rate=dropout_rate)(x)
 
-        x = layers.Dense(units=64, activation='elu')(x)
+        x = layers.Dense(units=64, activation=activation)(x)
         x = layers.BatchNormalization(axis=-1)(x)
-        self.base_out = layers.Dropout(rate=0.5)(x)
+        self.base_out = layers.Dropout(rate=dropout_rate)(x)
 
     def build_model(self):
         raise NotImplementedError
