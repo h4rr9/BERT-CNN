@@ -48,7 +48,7 @@ class MRPCModelTrainer(BaseTrain):
         K.get_session().run(tf.local_variables_initializer())
 
         history = self.model.fit(
-            x=[self.train_data[0], self.train_data[0]],
+            x=[self.train_data[0], self.train_data[1]],
             y=self.train_label,
             epochs=self.config.trainer.num_epochs,
             verbose=self.config.trainer.verbose_training,
