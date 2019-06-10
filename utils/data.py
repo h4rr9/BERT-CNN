@@ -29,7 +29,7 @@ def preprocess_label(label, onehot=False):
     return LabelEncoder().fit_transform(label)
 
 
-def create_dataset(data, label=None, batch_size=128, is_training=True, classification=True):
+def process_label(label=None, classification=True):
 
     if not label is None:
         if classification:
@@ -37,20 +37,7 @@ def create_dataset(data, label=None, batch_size=128, is_training=True, classific
                 label = preprocess_label(label, onehot=True)
             else:
                 label = preprocess_label(label, onehot=False)
-
-        if data.shape[0] != label.shape[0]:
-            data = np.swapaxes(data, 0, 1)
-
-        dataset = Dataset.from_tensor_slices(
-            (data, label))
-
-        if is_training:
-            dataset = dataset.shuffle(len(label))
-
-    else:
-        dataset = Dataset.from_tensor_slices(data)
-
-    return dataset.batch(batch_size).repeat()
+    return label
 
 
 def create_tokenizer():

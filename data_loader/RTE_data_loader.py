@@ -25,11 +25,11 @@ class RTEDataLoader(BaseDataLoader):
         val['sentence'] = val['sentence1'] + ' ||| ' + val['sentence2']
 
         train_examples = data.convert_text_to_example(train['sentence'].values)
-        self.train_labels = train['label'].values
+        self.train_labels = data.process_label(train['label'].values)
         self.n_train = train.shape[0]
 
         val_examples = data.convert_text_to_example(val['sentence'].values)
-        self.val_labels = val['label'].values
+        self.val_labels = data.process_label(val['label'].values)
         self.n_val = val.shape[0]
 
         test_examples = data.convert_text_to_example(test['sentence'].values)

@@ -25,8 +25,8 @@ class MNLIMDataLoader(BaseDataLoader):
         val['sentence'] = val['sentence1'] + ' ||| ' + val['sentence2']
 
         train_examples = data.convert_text_to_example(train['sentence'].values)
-        self.train_labels = train['gold_label'].values
-        self.n_train = train.shape[0]
+        self.train_labels = data.process_label(train['gold_label'].values)
+        self.n_train = data.process_label(train.shape[0])
 
         val_examples = data.convert_text_to_example(val['sentence'].values)
         self.val_labels = val['gold_label'].values

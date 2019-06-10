@@ -21,12 +21,12 @@ class STSBDataLoader(BaseDataLoader):
         val['sentence'] = val['sentence1'] + ' ||| ' + val['sentence2']
 
         train_examples = data.convert_text_to_example(train['sentence'].values)
-        self.train_labels = pd.to_numeric(
-            train['score'], errors='coerce').values
+        self.train_labels = data.process_label(pd.to_numeric(
+            train['score'], errors='coerce').values, classification=False)
         self.n_train = train.shape[0]
 
         val_examples = data.convert_text_to_example(val['sentence'].values)
-        self.val_labels = pd.to_numeric(val['score'], errors='coerce').values
+        self.val_labels = data.process_label(pd.to_numeric(val['score'], errors='coerce').values, classification=False)
         self.n_val = val.shape[0]
 
         test_examples = data.convert_text_to_example(test['sentence'].values)

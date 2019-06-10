@@ -17,11 +17,11 @@ class CoLADataLoader(BaseDataLoader):
             _DATA_PATH, "CoLA", "test.tsv"), sep="\t")
 
         train_examples = data.convert_text_to_example(train[3].values)
-        self.train_labels = train[1].values
+        self.train_labels = data.process_label(train[1].values)
         self.n_train = train.shape[0]
 
         val_examples = data.convert_text_to_example(val[3].values)
-        self.val_labels = val[1].values
+        self.val_labels = data.process_label(val[1].values)
         self.n_val = val.shape[0]
 
         test_examples = data.convert_text_to_example(test['sentence'].values)
