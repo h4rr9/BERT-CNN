@@ -33,7 +33,7 @@ def process_label(label=None, classification=True):
 
     if not label is None:
         if classification:
-            print('##### {0}'.format(len(np.unique(label))))
+
             if len(np.unique(label)) > 2:
                 label = preprocess_label(label, onehot=True)
             else:
